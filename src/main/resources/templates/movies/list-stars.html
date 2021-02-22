@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Stars</title>
+</head>
+<body>
+<div>
+    <a th:href="@{/star/add-star}">add new star</a><br>
+    <a th:href="@{/movies/list}">go to movie list</a><br>
+    <h1>Star List</h1>
+    <table border="1">
+        <thead>
+        <tr>
+
+            <th>Star Name</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="star : ${stars}">
+
+            <td th:text="${star.name}"></td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

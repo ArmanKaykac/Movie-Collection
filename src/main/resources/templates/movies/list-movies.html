@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie List</title>
+    <!-- CSS only -->
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+
+</head>
+<body>
+<div class="container">
+        <h3>Movie</h3>
+        <hr>
+    <!-- Search by title -->
+        <form action="/movies/list" class="form-inline">
+            <div class="form-group mb-2">
+                <input  type="text" class="form-control" name="title" placeholder="Search by title" />
+                <input type="submit" value="Search" class="btn btn-primary"/>
+            </div>
+        </form>
+    <!-- Search by genre -->
+    <form action="/movies/listGenre" class="form-inline">
+        <div class="form-group mb-2">
+            <input required type="text" class="form-control" name="genreName" placeholder="Search by genre" />
+            <input type="submit" value="Search" class="btn btn-primary"/>
+        </div>
+    </form>
+        <!--Add button -->
+        <a th:href="@{/movies/showFormForAdd}"
+        class="btn btn-primary btn-sm mb-3">
+            Add Movie
+        </a>
+
+    <a th:href="@{/star/add-star}"
+       class="btn btn-primary btn-sm mb-3">
+        Add Star
+    </a>
+
+
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+            <tr>
+                <th>
+                    <a th:href="@{'/movies/page/' + ${currentPage} + '?sortField=title&sortDir=' + ${reverseSortDir}}">Title</a>
+                </th>
+                <th>
+                    <a th:href="@{'/movies/page/' + ${currentPage} + '?sortField=title&sortDir=' + ${reverseSortDir}}">Description</a>
+                </th>
+                <th>
+                    <a th:href="@{'/movies/page/' + ${currentPage} + '?sortField=title&sortDir=' + ${reverseSortDir}}">Year</a>
+                </th>
+                <th><a th:href="@{'/movies/page/' + ${currentPage} + '?sortField=title&sortDir=' + ${reverseSortDir}}">Genre</a></th>
+                <th>Action</th>
+            </tr>
+            </thead>
+       <tbody>
+        <tr th:each="movie : ${listMovies}">
+                <td th:text="${movie.title}"/>
+                <td th:text="${movie.description}"/>
+                <td th:text="${movie.year}"/>
+                <td th:text="${movie.genre.name}"/>
+
+
+                <!-- Buttons-->
+                <td>
+                    <a th:href="@{/movies/showFormForUpdate(movieId=${movie.id})}"
+                        class="btn btn-info btn-sm">
+                        Update</a>
+
+                    <a th:href="@{/movies/delete(movieId=${movie.id})}"
+                        class="btn btn-danger btn-sm">
+                        Delete</a>
+
+                    <a th:href="@{/movies/details(movieId=${movie.id})}"
+                       class="btn btn-primary btn-sm">
+                        Details</a>
+                </td>
+        </tr>
+       </tbody>
+        </table>
+
+    <!-- pagination and sorting-->
+    <div th:if="${totalPages > 1}">
+        <div class="row col-sm-10">
+            <div class="col-sm-2">
+                Total Rows: [[${totalItems}]]
+            </div>
+            <div class="col-sm-1">
+                <span th:each="page: ${#numbers.sequence(1, totalPages)}">
+                    <a th:if="${currentPage != page}" th:href="@{'/movies/page/' + ${page} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${page}]]</a>
+                    <span th:unless="${currentPage != page}">[[${page}]]</span> &nbsp; &nbsp;
+                </span>
+            </div>
+            <div class="col-sm-1">
+                <a th:if="${currentPage < totalPages}" th:href="@{'/movies/page/' + ${currentPage + 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
+                <span th:unless="${currentPage < totalPages}">Next</span>
+            </div>
+            <div class="col-sm-1">
+                <a th:if="${currentPage < totalPages}" th:href="@{'/movies/page/' + ${totalPages} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
+                <span th:unless="${currentPage < totalPages}">Last</span>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

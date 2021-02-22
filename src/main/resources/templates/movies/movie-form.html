@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Movie</title>
+    <!-- CSS only -->
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+
+</head>
+<body>
+    <div class="container">
+        <h3>Movie</h3>
+        <hr>
+        <p class="h4 mb-4"> Add Movie</p>
+
+        <form action="#" th:action="@{/movies/save}" th:object="${movie}" method="post">
+            <!-- hidden form field to update -->
+            <input type="hidden" th:field="*{id}"/>
+
+            <input type="text" th:field="*{title}" class="form-control mb-4 col-4" placeholder="title">
+            <input type="text" th:field="*{description}" class="form-control mb-4 col-4" placeholder="description">
+            <input type="text" th:field="*{imageUrl}" class="form-control mb-4 col-4" placeholder="image Url">
+            <input type="number" th:field="*{year}" class="form-control mb-4 col-4" placeholder="year">
+<!--            <input type="text" th:field="*{genre}" class="form-control mb-4 col-4" placeholder="genre">-->
+            <select class="form-control  mb-4 col-4" id="exampleFormControlSelect1" th:field="*{genre}" >
+                <option    th:each="genre : ${genre}"    th:value="${genre.id}" th:text="${genre.name}"></option>
+            </select>
+
+            <select th:field="*{stars}" multiple="multiple">
+                <option th:each="star:${stars}" th:selected="${star.id}" th:value="${star.id}" th:text="${star.name}"></option>
+            </select> <br/>
+
+            <button type="submit" class="btn btn-info col-2">Save</button>
+
+        </form>
+    <hr>
+        <a th:href="@{/movies/list}">Back to the Movie List</a>
+    </div>
+</body>
+</html>

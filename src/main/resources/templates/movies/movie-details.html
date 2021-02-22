@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Movie</title>
+    <!-- CSS only -->
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+
+</head>
+<body>
+<div class="container">
+    <div th:object="${movie}">
+        <input type="hidden" th:field="*{id}"/>
+
+        <div style="text-align:right;float:right">
+            <img  th:src= '${movie.imageUrl}' >
+        </div>
+
+
+        <p >
+            Title: <span th:text="${movie.title}"></span> <br/> </p>
+        <p>
+        <p >
+            Year: <span th:text="${movie.year}"></span> <br/> </p>
+        <p>
+            Genre:    <span th:text="${movie.genre.name}"></span>  <br/></p>
+        <p>
+            Description: <span th:text="${movie.description}"></span>
+        </p>
+        <p> Cast: </p>
+        <p
+              th:each="star: ${movie.stars}" th:text="${star.name}">
+
+        </p>
+    </div>
+
+
+
+    <hr>
+    <a th:href="@{/movies/list}">Back to the Movie List</a>
+</div>
+</body>
+</html>

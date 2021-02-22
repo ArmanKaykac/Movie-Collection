@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Star</title>
+    <!-- CSS only -->
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1>New Star</h1>
+    <br>
+    <form action="#" th:action="@{/star/save}" th:object="${star}" method="POST">
+
+        <input type="hidden" th:field="*{id}"/> <br/>
+
+        <input required type="text" th:field="*{name}" class="form-control mb-4 col-4" placeholder="Star name"><br>
+        <br>
+
+        <button type="submit" class="btn btn-info col-2">Save</button>
+    </form> <br>
+    <a th:href="@{/movies/list}">go to movie list</a>
+</div>
+</body>
+</html>
