@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">>
+
 <head>
     <meta charset="UTF-8">
     <title>Movie List</title>
@@ -72,13 +74,15 @@
                         class="btn btn-info btn-sm">
                         Update</a>
 
-                    <a th:href="@{/movies/delete(movieId=${movie.id})}"
+                    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/movies/delete(movieId=${movie.id})}"
                         class="btn btn-danger btn-sm">
                         Delete</a>
+                    
 
                     <a th:href="@{/movies/details(movieId=${movie.id})}"
                        class="btn btn-primary btn-sm">
                         Details</a>
+
                 </td>
         </tr>
        </tbody>
