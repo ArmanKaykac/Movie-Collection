@@ -40,7 +40,8 @@
   16	science-fiction
   	\
   inMemoryAuthentication is used \
-  application.properties \
+  in application.properties \
+  MySQL is used\
   spring.datasource.username=root \
   spring.datasource.password=12345
 
