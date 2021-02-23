@@ -23,6 +23,22 @@
   
 # Db
   Genre filled in db. \
+  1	horror
+  2	adventure
+  3	action
+  4	drama
+  5	documentary
+  6	comedy
+  7	fantastic
+  8	romance
+  9	classics
+  10	sport
+  12	independent
+  13	animation
+  14	musicals
+  15	thriller
+  16	science-fiction
+  	\
   inMemoryAuthentication is used \
   application.properties \
   spring.datasource.username=root \
